@@ -1,0 +1,129 @@
+@charset "UTF-8";
+/* skinwizard */
+.backgroundImg {
+	background-image:/*@background-image*/url("./images/background.jpg")/*@*/;
+  background-color:/*@background-color*/#eee/*@*/;
+  background-size: cover;
+  background-repeat: /*@background-image-repeat=*/no-repeat/*@*/;
+  background-position:/*@background-image-position*/center/*@*/;
+}
+.homeBG {
+  height:/*@title-height*/300px/*@*/;
+  background-image:/*@title-background-image*/url("./images/homeBG.png")/*@*/;
+  background-position:/*@title-background-image-position*/50% 50%/*@*/;
+  background-color:/*@title-background-color*/#000000/*@*/;
+  background-size: cover;
+  background-repeat: /*@title-background-image-repeat=*/repeat/*@*/;
+  font-family:/*@title-font-family*/"NanumBarunGothic"/*@*/;
+  color:/*@title-color*/#FFFFFF/*@*/;
+  padding:16px;
+}
+.homeBG .homeName{
+  font-size:/*@title-font-size*/1.5em/*@*/;
+}
+@font-face {
+  font-family: 'NanumBarunGothic';
+  src: url("./images/NanumBarunGothic.eot");
+  src: url("./images/NanumBarunGothic.eot?#iefix") format("embedded-opentype"), url("./images/NanumBarunGothic.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+}
+.column-1 .contents, .column-1 aside{
+  width:100%;
+  float:none;
+}
+.column-2 .sidebar-temp {
+  opacity: 1;
+}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+@media(min-width:768px) {
+  .container {
+    width: 768px;
+  }
+}
+@media(min-width:1200px) {
+  .container {
+    width: /*@post-width+200:*/1000px/*@*/;
+  }
+}
+@media(min-width:1400px) {
+  .container {
+    width: /*@post-width:+400*/1200px/*@*/;
+  }
+}
+
+article .titleWrap h2 {
+  color:/*@post-title-color*/#000000/*@*/;
+  font-family:/*@post-title-font-family*/"NanumBarunGothic"/*@*/;
+  font-size:/*@post-title-font-size*/2em/*@*/;
+}
+
+/*드로워 배경이미지*/
+#drawer #drawerProfile {
+  /*background-image: url("./images/drawerBG.jpg");*/
+	background-color: #4CAF50;
+}
+/*color customize*/
+/*blue#3F51B5*/
+header {
+  background: #3F51B5;
+}
+header #searchBox {
+  background: #3F51B5;
+}
+header #searchBox input {
+  background: #3F51B5;
+}
+/*lightblue*/
+#searchResultWrap .moreResult a {
+  color: #4285f4;
+}
+#searchList .listHeader {
+  border-bottom: #4285f4 solid 2px;
+}
+
+article .article .moreless_content {
+  border: #4285f4 dotted 1px;
+}
+
+.commentsWrap .tabs {
+  background: #4285f4;
+}
+.commentsWrap .tabs li {
+  border-bottom: #4285f4 solid 2px;
+}
+#guestbook form .write textarea:focus, .commentsWrap form .write textarea:focus {
+  border-bottom: #4285f4 solid 2px;
+}
+#guestbook form .write button.submit, .commentsWrap form .write button.submit {
+  color: #4285f4;
+}
+#paging a {
+  color: #4285f4;
+}
+aside .tabs li.active {
+  border-bottom: #4285f4 solid 2px;
+}
+footer {
+  background: #4285f4;
+}
+/*pink*/
+#guestbook form .write .writerInfo label, .commentsWrap form .write .writerInfo label {
+  color: #ff4081;
+}
+#guestbook form .write .writerInfo input[type="text"]:focus, #guestbook form .write .writerInfo input[type="password"]:focus, .commentsWrap form .write .writerInfo input[type="text"]:focus, .commentsWrap form .write .writerInfo input[type="password"]:focus {
+  border-bottom: #ff4081 solid 2px;
+}
+#toTop {background: #ff4081;}
+article .titleWrap .admin{background: #ff4081;}
+/*yellow*/
+.commentsWrap li.active {
+  border-bottom: #FFF176 solid 2px;
+}
+
+/*user css*/
+.iframefull { width:100%; height:80vw; padding:0; border:0;}
