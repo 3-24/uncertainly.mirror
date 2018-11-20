@@ -1,121 +1,35 @@
-<p>이 번사이드 보조정리는 유한 대칭군 위에서 기술되어 있습니다.</p>
-<h2>0. 유한군 용어</h2>
-<p>유한 집합 \(X\)
-<ul>
-<li>\(X\)의 대칭군symmetric group =  \(S_X = \{ \sigma \in X \times X : \sigma \text{ is bijective function}\}\)
-<li>\(X\)
-
-</ul>
-<p>이다.</p>
-<p>&nbsp;</p>
-<h2>1. 정의</h2>
-<p>\((G,\circ,id)\)를 유한 집합 \(X\)
+<h1>카탈란 수</h1>
+<h2>1. 문제</h2>
+<p>\(n \times n\) 격자에서 왼쪽 아래에서 오른쪽 위 모서리로 가는 오른쪽이나 위로 가는 이동만으로 이루어진 경로를 생각하자. 이 때 왼쪽 아래와 오른쪽 위 모서리를 연결한 대각선 위로 올라가지 않는 경로는 몇 개나 있을까?</p>
+<p><img src='https://raw.githubusercontent.com/3-24/uncertainly.mirror/master/article/image/catalan03.png' alt='catalan' referrerPolicy='no-referrer' /></p>
+<p>이 조건을 만족하는 경우의 수를 카탈란 수라고 하고, \(C_n\)으로 적습니다.</p>
+<h2>2. 일반항</h2>
+<p>크게 두 단계에 걸쳐서 증명에 들어갑니다. 편의상 &#39;오른쪽으로 이동&#39;을 \(\Rightarrow\), &#39;위로 이동&#39;을 \(\Uparrow\)로 앞으로 적겠습니다.</p>
+<h3>2.1. 대각선 조건이 없을 때</h3>
+<p>(사실 유명한 문제입니다. 알면 건너뛰세요)</p>
+<p>\(n\times m\) 격자에서 왼쪽 아래에서 오른쪽 위 모서리로 가는 최단 경로의 개수는?</p>
+<p>가로 길이가 \(n\), 세로 길이가 \(m\)이기 때문에 왼쪽 아래 모서리에서 순서에 상관 없이 \(\Rightarrow\)을 \(n\)번, \(\Uparrow\)을 \(m\)번 했을 때 오른쪽 위 모서리에 도달하게 됩니다. 따라서 문제에서 묻는 최단 경로의 개수 \(D_{n,m}\)는 다음과 같습니다.</p>
 <p>\[
-|X/G| = \frac {1}{|G|} \sum _{\sigma \in G} | X_\sigma |
+D_{n,m} ={n+m \choose n} = \frac {(n+m)!}{n!m!}
 \]</p>
-<p>&nbsp;</p>
-<p>여기서 사용되었고 또 앞으로 사용할 집합들의 의미는 다음과 같습니다:</p>
-<ul>
-<li>\(G(x) = \{ \sigma (x) : \sigma \in G\} \) for each \(x \in X\)
-<li>\( X/G = \{ G(x) : x \in X \}\)
-<li>\( X_\sigma = \{ x \in X: \sigma (x) =x \} \) for each \( \sigma \in G \)
-<li>\( G_x = \{\sigma \in G : \sigma(x) = x \}\) for each \(x \in X \)
-
-</ul>
-<p>&nbsp;</p>
-<h3>1.1 예시</h3>
-<p>입체 도형을 색칠하는 경우의 수를 구할 때 사용됩니다. \(X\)를 주어진 색깔로 각 면을 칠하는 방법으로 놓고, \(G\)
-<p>&nbsp;</p>
-<p><strong>문제. 정육면체를 4가지 색으로 칠하는 방법의 가짓수는 얼마인가? 단, 돌렸을 때 같아지는 것은 하나로 센다.</strong></p>
-<p>&#39;색칠&#39;과 &#39;돌리기&#39;를 동시에 고려해서 개수를 세는 것은 힘들기 때문에 이 대상을 군으로 바라보면서 그 둘을 분리할 수 있도록 번사이드 보조정리를 사용합니다.</p>
-<ul>
-<li>\(X=\{1,2,3,4\}^6\), \(x \in X \)
-<li>\(G \subset X \times X\)
-
-</ul>
-<p>이 때, \(G\)가 \(X\)
-<ul>
-<li><p>\(G \subseteq S_X\)
-</li>
-<li><p>\((G, \circ\)
-<ul>
-<li>\(\forall \sigma_1 , \sigma_2 \in G, \sigma_1 \circ \sigma_2 \in G \)
-<li>항등함수(\(id\))가 \(G\)
-<li>\( \forall \sigma_1 , \sigma_2 , \sigma_3 \in G, (\sigma_1 \circ \sigma_2) \circ \sigma_3 = \sigma_1 \circ (\sigma_2 \circ \sigma_3) \)
-<li>\(\forall \sigma \in G, \exists \sigma^{-1} \in G \; \sigma \circ \sigma ^{-1} = \sigma^{-1} \circ \sigma = id \)
-
-</ul>
-</li>
-
-</ul>
-<p>이제 번사이드 보조정리를 사용하기 위해서는 회전 함수로 이루어진 \(G\)를 직접 세워야 하는데, 의외로 까다로운 부분이에요. 일단 6개의 면이 있고 각 면에 대해 옆면을 회전하는 방법이 4가지이므로, \(|G| = 24\)
-<p>이제 각 \( \sigma \in G\)에 대해 \(X_\sigma\)를 구하기 앞서 \(G\)
-<ul>
-<li>돌리지 않음 ( \(\{id\}\)
-<li>면에 대해 90도 회전하는 방법 6가지 (\(G_1\)
-<li>면에 대해 180도 회전하는 방법 3가지 (\(G_2\)
-<li>꼭짓점에 대해 120도 회전하는 방법 8가지 (\(G_3\)
-<li>모서리에 대해 180도 회전하는 방법 6가지 (\(G_4\)
-
-</ul>
-<p>&#39;면에 대해 회전한다&#39;는 것은 면의 중심을 관통하는 회전축을 기준으로 고정된 방향(시계방향, 반시계방향 중 하나 선택)으로 돌린다는 것을 뜻합니다.</p>
-<p>&#39;꼭짓점에 대해 회전한다&#39;는 정육면체에서 양 끝에 있는 꼭짓점을 관통하는 회전축을 기준으로 돌리는 것을 의미합니다.</p>
-<p>&#39;모서리에 대해 회전한다&#39;는 모서리의 절반과 반대쪽 모서리의 절반을 관통하는 회전축을 기준으로 합니다.</p>
-<p>이 방법들이 서로 다르고 개수를 모두 더했을 때 24가 되므로 회전하는 방법을 이렇게 나눌 수 있다는 것을 확인할 수 있습니다. 즉, \(\{G_1, G_2 ,G_3, G_4, \{id\} \} \) 는 \(G\)
-<p>이제 번사이드 보조정리를 사용하면</p>
-<ul>
-<li>\( |G| = 24\)
-<li>\(|X_{id}| = |X| = 4^6  \)
-<li>\(\forall \sigma \in G_{1} , \;|X_\sigma| = 4^3\)
-<li>\(\forall \sigma \in G_2,\; |X_\sigma| = 4^4 \)
-<li>\(\forall \sigma \in G_3, \; |X_\sigma| = 4^2 \)
-<li>\( \forall \sigma \in G_4, \;|X_\sigma| = 4^3 \)
-
-</ul>
+<h3>2.2. 대각선 조건이 있을 때</h3>
+<p>2.1의 문제로 이 문제를 바꿀 것입니다. 핵심 아이디어는 다음과 같습니다:</p>
+<p><img src='https://raw.githubusercontent.com/3-24/uncertainly.mirror/master/article/image/catalan04.png' alt='catalan' referrerPolicy='no-referrer' /></p>
+<p>대각선을 넘어가는 경로를 생각합니다. 이 때, 대각선을 최초로 넘어간 이후의 경로를 대칭시켜버리면, \(n-1 \times n+1\)의 격자에서 경로를 얻을 수 있습니다. 즉, <strong>문제의 조건을 위배하는 경로는 \(n-1 \times n+1\) 격자의 경로에 대응</strong>됩니다.</p>
+<p>그런데 그림의 \(n-1 \times n+1\)에 남아 있는 대각선을 살펴보면, <strong>모든 \(n-1 \times n+1\)경로가 대각선을 지나갈 수밖에 없습니다.</strong>  즉, 반대로 \(n-1 \times n+1\) 경로를 문제를 만족하지 않는 \(n \times n\) 경로에 대응할 수 있습니다.</p>
+<p>따라서 문제의 조건을 위배하는 경로의 개수는 \(D_{n-1,n+1}\)입니다.</p>
+<p>이제 남은 것은 \(n \times n\)에서 모든 경로에서 조건을 위배하는 경로를 제외한 것을 세주는 것입니다!</p>
 <p>\[
-|X/G| = \frac 1 {|G|} \sum _{ \sigma \in G} |X_\sigma| = \frac 1 {24} (4^6 + 6 \times 4^3 + 3 \times 4^4 + 8 \times 4^2 + 6 \times 4^3 )
+C_n = D_{n,n} - D_{n-1,n+1} = \frac{(2n)!}{n!n!} \left(1 - \frac {n}{n+1} \right) = \frac 1{n+1} {2n \choose n}
 \]</p>
-<p>&nbsp;</p>
-<p>마지막으로 얻는 식에서 알 수 있는 점은 칠할 수 있는  색깔의 가짓수는 사실 식의 형태에 큰 영향을 주지 않는다는 거에요! 만약 정육면체를 \(n\)
+<p>이 스케치를 집합 용어를 써서 엄밀하게 적어주면 완전 증명full proof가 됩니다.</p>
+<h2>3. 점화식</h2>
+<p><img src='https://raw.githubusercontent.com/3-24/uncertainly.mirror/master/article/image/catalan05.png' alt='catalan05' referrerPolicy='no-referrer' /></p>
+<p>처음으로 대각선과 만나는 좌표를 중심으로 생각을 전개하면 쉽습니다. 위 그림의 경우에는 \((3,3)\)에서 만나는데, 그 이후로 \((3,3)\)에서 \((8,8)\)로 가는 대각선을 넘지 않는 경로를 세주면 되고, 그 경우의 수는 \(C_5\)입니다. (대각선을 만나지 않고 끝점에 도달했더라도, 그 끝점을 대각선과 만난 점으로 생각하면 됩니다)</p>
+<p>이제 \((0,0)\)에서 \((3,3)\)으로 가는 대각선과 만나지 않는 경로들을 세야 하는데, 아래 그림을 보면 역시 이미 풀었던 문제라는 것을 알 수 있습니다. 처음에 \(\Rightarrow\)로, 마지막에도 \(\Uparrow\)로 행동이 강제되는데, 그러고 남은 문제는 \(2 \times 2\)의 문제, 즉 \(C_2\)입니다.</p>
+<p><img src='https://raw.githubusercontent.com/3-24/uncertainly.mirror/master/article/image/catalan06.png' alt='catalan06' referrerPolicy='no-referrer' /></p>
+<p>이 셈을 \((1,1)\)에서 \((8,8)\)까지 모두 해서 더하면 점화식을 얻을 수 있습니다. 일반적으로 접근하면 다음과 같은 식을 쉽게 쓸 수 있습니다.</p>
 <p>\[
-\frac 1 24 ( n^6 + 3n^4 + 12n^3 + 8n^2 )
+C_n = \sum _{i=1} ^n C_{i-1} C_{n-i}
 \]</p>
-<p>	</p>
-<h2>2. 증명</h2>
-<h3>2.1. 보조정리 1</h3>
-<h4>2.1.1. 정의</h4>
-<p>\[
-|G_x| |G(x)| = |G|
-\]</p>
-<p><del>그러니까, &#39;번사이드 보조정리&#39;의 증명에 필요한 보조정리입니다.</del> 이 부분이 가장 힘든 직관인 것 같습니다. </p>
-<h4>2.1.2. 증명</h4>
-<p>\(G_x\)를 확장해서 다루기 위해 \(H_{x,y}\)
-<p>\[
-H_{x,y} = \{ \sigma \in G : \sigma(x) = y \}
-\]</p>
-<p><strong>1. \(y \in G(x)\)일 때, \(|H_{x,y}| = |G_x|\)
-<p>\( f: G_x \to H_{x,y} \)
-<p>\[
-f(\sigma) = h \circ \sigma  \quad \text{where } h(x) = y
-\]</p>
-<p>\(f \in G_x \times H_{x,y}\)이고, 모든 \(\sigma \in G_x\)가 \(H_{x,y}\)로 대응되므로 \(f\)
-<p>\(h\)
-<p>\(h^{-1} \in G\)이고, 따라서 \(f^{-1}(\sigma) = h^{-1} \circ \sigma \)로 정의했을 때 \(f^{-1}\)은 \(f\)
-<p>따라서 \(f\)는 일대일대응bijective이다. 즉, \(|H_{x,y} | = |G_x|\)
-<p>&nbsp;</p>
-<p><strong>2. 임의의 \(x \in X\)에 대해 \(\{H_{x,y}:y \in G(x)\}\)는 \(G\)
-<p>분할의 정의를 하나씩 확인해보면 됩니다. 겹치는 일이 없고, 모두 합쳤을 때 \(G\)
-<p>&nbsp;</p>
-<h3>2.2.</h3>
-<p>다음과 같은 관계relation을 고려합니다:</p>
-<p>\[
-R = \{(x , \sigma )\in X \times G : \sigma(x) = x\}
-\]</p>
-<p>이런 관계를 정의하면 좋은 이유는 두 번 세면서 등식을 얻어내기 좋기 때문이에요.</p>
-<p>\[
-|R| = \sum _{x \in X} | G_x | = \sum _{ \sigma \in G } |X_\sigma |
-\]</p>
-<p>이대로 위에서 증명한 보조정리를 써가면서 전개하면 원하던 결과를 얻을 수 있습니다.</p>
-<p>\[
-\begin{aligned} \frac 1 {|G|} \sum _{\sigma \in G} |X_\sigma| &amp;= \sum _{x \in X} \frac {|G_x|}{|G|} \\ &amp;= \sum _{x\in X} \frac {1}{|G(x)|} = \sum _{A \in X/G} \sum _{x \in A} \frac {1}{|A|} = |X/G| \end{aligned}
-\]</p>
+<p>그리고 이 점화식의 시작인 \(C_0 = 1\)도 같이 써주면 됩니다.</p>

@@ -39,6 +39,7 @@ def main():
                     j = checkInline(s)
                     converted_string += s[:j] + '\)'
                     s = s[j+1:]
+                converted_string += s
                 f.write(converted_string + '\n')
             else:
                 f.write(s+'\n')
