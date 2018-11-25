@@ -1,35 +1,83 @@
-<h1>카탈란 수</h1>
-<h2>1. 문제</h2>
-<p>\(n \times n\) 격자에서 왼쪽 아래에서 오른쪽 위 모서리로 가는 오른쪽이나 위로 가는 이동만으로 이루어진 경로를 생각하자. 이 때 왼쪽 아래와 오른쪽 위 모서리를 연결한 대각선 위로 올라가지 않는 경로는 몇 개나 있을까?</p>
-<p><img src='https://raw.githubusercontent.com/3-24/uncertainly.mirror/master/article/image/catalan03.png' alt='catalan' referrerPolicy='no-referrer' /></p>
-<p>이 조건을 만족하는 경우의 수를 카탈란 수라고 하고, \(C_n\)으로 적습니다.</p>
-<h2>2. 일반항</h2>
-<p>크게 두 단계에 걸쳐서 증명에 들어갑니다. 편의상 &#39;오른쪽으로 이동&#39;을 \(\Rightarrow\), &#39;위로 이동&#39;을 \(\Uparrow\)로 앞으로 적겠습니다.</p>
-<h3>2.1. 대각선 조건이 없을 때</h3>
-<p>(사실 유명한 문제입니다. 알면 건너뛰세요)</p>
-<p>\(n\times m\) 격자에서 왼쪽 아래에서 오른쪽 위 모서리로 가는 최단 경로의 개수는?</p>
-<p>가로 길이가 \(n\), 세로 길이가 \(m\)이기 때문에 왼쪽 아래 모서리에서 순서에 상관 없이 \(\Rightarrow\)을 \(n\)번, \(\Uparrow\)을 \(m\)번 했을 때 오른쪽 위 모서리에 도달하게 됩니다. 따라서 문제에서 묻는 최단 경로의 개수 \(D_{n,m}\)는 다음과 같습니다.</p>
+<h1>이분그래프</h1>
+<h2>1. 정의</h2>
+<p>그래프 \(G = (V,E)\)에 대해 다음 조건을 만족하면 이분그래프bipartite graph 라고 합니다.</p>
+<p>공집합이 아닌 \(V\)의 분할partition \(\{V_1 ,V_2\}\)가 있어서</p>
 <p>\[
-D_{n,m} ={n+m \choose n} = \frac {(n+m)!}{n!m!}
+E \subseteq \{ \{v_1, v_2\} : v_1 \in V_1, v_2 \in V_2 \}\
 \]</p>
-<h3>2.2. 대각선 조건이 있을 때</h3>
-<p>2.1의 문제로 이 문제를 바꿀 것입니다. 핵심 아이디어는 다음과 같습니다:</p>
-<p><img src='https://raw.githubusercontent.com/3-24/uncertainly.mirror/master/article/image/catalan04.png' alt='catalan' referrerPolicy='no-referrer' /></p>
-<p>대각선을 넘어가는 경로를 생각합니다. 이 때, 대각선을 최초로 넘어간 이후의 경로를 대칭시켜버리면, \(n-1 \times n+1\)의 격자에서 경로를 얻을 수 있습니다. 즉, <strong>문제의 조건을 위배하는 경로는 \(n-1 \times n+1\) 격자의 경로에 대응</strong>됩니다.</p>
-<p>그런데 그림의 \(n-1 \times n+1\)에 남아 있는 대각선을 살펴보면, <strong>모든 \(n-1 \times n+1\)경로가 대각선을 지나갈 수밖에 없습니다.</strong>  즉, 반대로 \(n-1 \times n+1\) 경로를 문제를 만족하지 않는 \(n \times n\) 경로에 대응할 수 있습니다.</p>
-<p>따라서 문제의 조건을 위배하는 경로의 개수는 \(D_{n-1,n+1}\)입니다.</p>
-<p>이제 남은 것은 \(n \times n\)에서 모든 경로에서 조건을 위배하는 경로를 제외한 것을 세주는 것입니다!</p>
+<p>이와 같은 이분그래프에 대해 추가적인 표기법으로 \(G = (V_1, V_2, E)\)를 사용하기도 합니다. Figure 1과 같은 형태입니다.</p>
+<p><img src='https://i.stack.imgur.com/KZ9eG.png' alt='img' referrerPolicy='no-referrer' /></p>
+<p>Figure 1. 이분그래프의 예</p>
+<h2>2. 판별</h2>
+<p>따라서 어떤 그래프가 이분그래프인지 아닌지 판별할 때는 Figure 2와 같이 두 가지 색깔을 칠하면서 접근하면 좋습니다. 어떤 변을 잡아도 그 변을 구성하는 꼭짓점은 다른 색깔로 칠해져야 하기 때문입니다.</p>
+<p><img src='http://mathworld.wolfram.com/images/eps-gif/BipartiteGraph_1000.gif' alt='img' referrerPolicy='no-referrer' /></p>
+<p>Figure 2. 이분그래프의 판별</p>
+<h3>2.1. 알고리즘</h3>
+<p><strong>프로그래밍</strong>으로 이분그래프를 확인할 때는 BFS 방식을 사용하면 됩니다. 2에서 이분그래프를 판별하는 과정을 그대로 적용합니다. 입력 형태는 (<a href='https://www.acmicpc.net/problem/1707'>#</a>)와 같고, Python 3.7에서 쓰여진 코드는 다음과 같습니다:</p>
+<pre><code class='language-python' lang='python'>test_nbr = int(input()) # number of test cases
+
+def isBipartite():
+    # v and e is number of vertexes and edges, respectively.
+    v,e = map(int,input().split())
+
+    # None if not colored
+    # If colored, there are two bool cases: False and True.
+    colorArr = [None for _ in range(v+1)]
+    adjacentPoints = [[] for _ in range(v+1)]
+
+    for i in range(e):
+        v1, v2 = map(int, input().split()) # edge (v1, v2) is expected input
+        adjacentPoints[v1].append(v2)
+        adjacentPoints[v2].append(v1)
+
+    queue = []
+    node = set([i for i in range(1,v+1)]) # for non-connected graph
+
+    while bool(node): # node is nonempty
+        c = node.pop()
+        queue.append(c)
+        while bool(queue): # queue is nonempty
+            start = queue[0]
+            for u in adjacentPoints[start]:
+                if colorArr[u] is not None:
+                    if colorArr[u] is colorArr[start]:
+                        return False
+                else:
+                    colorArr[u] = not colorArr[start]
+                    queue.append(u)
+            del queue[0]
+            if start != c: node.remove(start)
+
+    return True
+
+
+for _ in range(test_nbr):
+    print(&#39;YES&#39; if isBipartite() else &#39;NO&#39;)
+</code></pre>
+<h2>3. 정리</h2>
+<p><strong>이분그래프는 홀수 길이의 순환cycle이 존재하지 않고, 그 역도 성립한다.</strong></p>
+<h3>3.1. 정방향 증명</h3>
+<p><strong>이분그래프는 홀수 길이의 순환이 존재하지 않는다.</strong></p>
+<p>이분그래프 \(G = (U,V,E)\)에 대해 \(E \subseteq U \times V\)이므로 모든 순환의 형태는 \(U\)와 \(V\)가 교대해서 나타난다. 따라서 그 순환의 길이는 짝수이다.</p>
+<h3>3.2. 역방향 증명</h3>
+<p><strong>홀수 길이의 순환이 존재하지 않는 그래프는 이분그래프이다.</strong></p>
+<blockquote><p>직접 색칠하면서 이분그래프를 판별할 때의 과정이 증명에 담겨있습니다. 처음에 점 하나를 잡아서 색칠해놓고, 인접한 것들을 계속 반대 색깔로 칠해 나가면서 모순이 생기는 지를 확인해야 합니다. 이를 쉽게 서술하기 위해 &#39;최소 경로&#39;라는 개념을 도입했습니다.</p>
+</blockquote>
+<p>\(G = (V,E)\)에 대해 임의의 \(v\in V\)를 잡자. 그리고 직접 이분그래프를 설계하기 위해 다음과 같은 \(A,B \subset V\)를 정의한다.</p>
 <p>\[
-C_n = D_{n,n} - D_{n-1,n+1} = \frac{(2n)!}{n!n!} \left(1 - \frac {n}{n+1} \right) = \frac 1{n+1} {2n \choose n}
+A = \{ a \in V : \text{the shortest path from } a \text{ to } v \text{ has odd length }\}\\
+B = \{ b \in V: \text{the shortest path from } b \text { to } v \text{ has even length }\}
 \]</p>
-<p>이 스케치를 집합 용어를 써서 엄밀하게 적어주면 완전 증명full proof가 됩니다.</p>
-<h2>3. 점화식</h2>
-<p><img src='https://raw.githubusercontent.com/3-24/uncertainly.mirror/master/article/image/catalan05.png' alt='catalan05' referrerPolicy='no-referrer' /></p>
-<p>처음으로 대각선과 만나는 좌표를 중심으로 생각을 전개하면 쉽습니다. 위 그림의 경우에는 \((3,3)\)에서 만나는데, 그 이후로 \((3,3)\)에서 \((8,8)\)로 가는 대각선을 넘지 않는 경로를 세주면 되고, 그 경우의 수는 \(C_5\)입니다. (대각선을 만나지 않고 끝점에 도달했더라도, 그 끝점을 대각선과 만난 점으로 생각하면 됩니다)</p>
-<p>이제 \((0,0)\)에서 \((3,3)\)으로 가는 대각선과 만나지 않는 경로들을 세야 하는데, 아래 그림을 보면 역시 이미 풀었던 문제라는 것을 알 수 있습니다. 처음에 \(\Rightarrow\)로, 마지막에도 \(\Uparrow\)로 행동이 강제되는데, 그러고 남은 문제는 \(2 \times 2\)의 문제, 즉 \(C_2\)입니다.</p>
-<p><img src='https://raw.githubusercontent.com/3-24/uncertainly.mirror/master/article/image/catalan06.png' alt='catalan06' referrerPolicy='no-referrer' /></p>
-<p>이 셈을 \((1,1)\)에서 \((8,8)\)까지 모두 해서 더하면 점화식을 얻을 수 있습니다. 일반적으로 접근하면 다음과 같은 식을 쉽게 쓸 수 있습니다.</p>
+<p>먼저, \(A \sqcup B = V\)이다. ( \(A,B\)는 서로소disjoint이고, \(A \cup B=V\)라는 뜻)</p>
+<p>이제 \(E \subseteq \{ \{a,b\} : a \in A \wedge b \in B \} \)임을 보일 것이다.</p>
+<p>서로 다른 \(a_1, a_2 \in A\)에 대해 \(a_1 \)과 \(v\) 사이의 최소 경로 길이를 \(l(a_1)\), \(a_2\)와 \(v\) 사이의 최소 경로 길이를 \(l(a_2)\)라고 놓으면 다음이 성립한다:</p>
 <p>\[
-C_n = \sum _{i=1} ^n C_{i-1} C_{n-i}
+2 | l(a_1) + l(a_2)
 \]</p>
-<p>그리고 이 점화식의 시작인 \(C_0 = 1\)도 같이 써주면 됩니다.</p>
+<p>만약에 \( \{a_1, a_2 \} \in E \)라면 \(a_1, a_2, v\)를 잇는 순환의 길이가 홀수이므로 모순이다.</p>
+<p>\(B\)도 이것이 똑같이 성립한다.</p>
+<p>따라서 \(A\)끼리 연결된 선이 없고, \(B\)끼리도 연결된 선이 없으므로 \(G\)는 이분그래프이다.</p>
+<p>&nbsp;</p>
+<h2>출처</h2>
+<p>[1] <a href='https://tex.stackexchange.com/questions/15088/bipartite-graphs' target='_blank' class='url'>https://tex.stackexchange.com/questions/15088/bipartite-graphs</a></p>
+<p>[2] <a href='http://mathworld.wolfram.com/BipartiteGraph.html' target='_blank' class='url'>http://mathworld.wolfram.com/BipartiteGraph.html</a></p>
